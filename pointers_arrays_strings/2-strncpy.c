@@ -1,4 +1,4 @@
-include "main.h"
+#include "main.h"
 /**
  * _strncpy - check the code
  * @src: - input of function
