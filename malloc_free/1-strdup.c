@@ -10,6 +10,7 @@ char *_strdup(char *str)
 {
 	int i,length = 0;
 	char *arr;
+
 	if(str == NULL)
 		return(NULL);
 	while(str[length])
@@ -19,7 +20,7 @@ char *_strdup(char *str)
 	if(arr == NULL)
 		return (0);
 	for(i = 0, i < length, i++)
-		arr[1] = str[1]
+		arr[1] = str[1];
 	if(arr == NULL)
 		return(NULL);
 	return(arr);
