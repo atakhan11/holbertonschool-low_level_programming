@@ -1,31 +1,32 @@
+/**
+ *  _strdup - returns a pointer to duplicated string.
+ *  @str: pointer
+ *  *Return: pointer to duplicated string
+ */
 #include "main.h"
 #include <stdlib.h>
-#include <stddef.h>
-
-/**
- * _strdup - copy and return input str
- * @str: - entered string
- * Return: Every element of array
- */
-
 char *_strdup(char *str)
 {
-	int i, length = 0;
-	char *arr;
+	char *t;
+	int len = 0;
+	int i = 0;
 
 	if (str == NULL)
 		return (NULL);
-	while (str[length])
-		length++;
-
-	arr = malloc((length + 1) * sizeof(char));
-	if (arr == NULL)
-		return (0);
-	for (i = 0; i < length; i++)
+	while (*(str + len) != 0)
 	{
-		arr[i] = str[i];
+		len += 1;
 	}
-	if (arr == NULL)
+	t = malloc(sizeof(char) * (len + 1));
+	if (t == NULL)
+	{
 		return (NULL);
-	return (arr);
+	}
+	while (i < len)
+	{
+		t[i] = str[i];
+		i++;
+	}
+	t[i] = '\0';
+	return (t);
 }	
