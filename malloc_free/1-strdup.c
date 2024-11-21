@@ -1,11 +1,10 @@
+#include "main.h"
+#include <stdlib.h>
 /**
  *  _strdup - returns a pointer to duplicated string.
  *  @str: pointer
  *  *Return: pointer to duplicated string
  */
-#include "main.h"
-#include <stdlib.h>
-char *_strdup(char *str)
 {
 	char *t;
 	int len = 0;
@@ -29,4 +28,4 @@ char *_strdup(char *str)
 	}
 	t[i] = '\0';
 	return (t);
-}	
+}
