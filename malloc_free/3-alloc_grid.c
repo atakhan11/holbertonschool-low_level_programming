@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
+
 /**
  * alloc_grid - return pointer to 2D array.
  * @width: variable
@@ -8,7 +9,7 @@
  */
 int **alloc_grid(int width, int height)
 {
-	int **z;
+	int **t;
 	int i;
 	int j;
 
