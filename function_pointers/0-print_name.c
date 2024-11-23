@@ -1,3 +1,4 @@
+#pragma once
 #include "function_pointers.h"
 /**
  * print_name - prints entered name
