@@ -1,49 +1,69 @@
 #include "variadic_functions.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
- * print_all - prints all the arguments that are passed to it in any format
- * @format: format of the argument
+ * _strlen - return length of string
+ * @s: variable
+ * Return: length of string
+ */
+int _strlen(const char *s)
+{
+	int count;
+
+	count = 0;
+	while (*(s + count) != 0)
+	{
+		count++;
+	}
+	return (count);
+}
+
+/**
+ * print_all - prints anything that given.
+ * @format: list of types of arguments passed into.
+ * Return: Nothing
  */
 void print_all(const char * const format, ...)
 {
-	unsigned int i, j, sep = 0;
+	va_list arr;
+	int i = 0;
 	char *str;
-	char c_args[] = "cifs";
-	va_list args;
 
-	va_start(args, format);
-	i = 0;
-	while (format && format[i])
+	va_start(arr, format);
+	while (format != NULL && format[i] != '\0')
 	{
-		j = 0;
-		while (c_args[j])
-		{
-			if (format[i] == c_args[j] && sep)
-			{
-				printf(", ");
-				break;
-			} j++;
-		}
 		switch (format[i])
 		{
 			case 'c':
-				printf("%c", va_arg(args, int)), sep = 1;
+				printf("%c", va_arg(arr, int));
 				break;
 			case 'i':
-				printf("%d", va_arg(args, int)), sep = 1;
+				printf("%d", va_arg(arr, int));
 				break;
 			case 'f':
-				printf("%f", va_arg(args, double)), sep = 1;
+				printf("%f", va_arg(arr, double));
 				break;
 			case 's':
-				str = va_arg(args, char *), sep = 1;
-				if (!str)
+				str = va_arg(arr, char*);
+				if (str == NULL)
 				{
 					printf("(nil)");
 					break;
 				}
 				printf("%s", str);
 				break;
-		} i++;
-	} va_end(args), printf("\n");
+			default:
+				i++;
+				continue;
+		}
+		if (i != _strlen(format) - 1)
+		{
+			printf(", ");
+			i++;
+			continue;
+		}
+		i++;
+	}
+	va_end(arr), printf("\n");
 }
