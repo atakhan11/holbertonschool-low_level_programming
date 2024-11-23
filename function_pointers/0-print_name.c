@@ -1,5 +1,5 @@
-#pragma once
 #include "function_pointers.h"
+#include <stdio.h>
 /**
  * print_name - prints entered name
  * @name: - input of name
