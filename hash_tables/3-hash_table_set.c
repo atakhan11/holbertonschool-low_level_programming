@@ -1,34 +1,43 @@
 #include "hash_tables.h"
+
 /**
- * hash_table_set - set hash table
- * @ht: pointer
- * @key: string for the key
- * @value: value of key
- * Return: 0 if failed, 1 if success
+ * create_node - creates a new hash node
+ * @key: key string
+ * @value: value string
+ * Return: pointer to new node or NULL
+ */
+hash_node_t *create_node(const char *key, const char *value)
+{
+	hash_node_t *node;
+
+	node = malloc(sizeof(hash_node_t));
+	if (node == NULL)
+		return (NULL);
+
+	node->key = strdup(key);
+	node->value = strdup(value);
+	node->next = NULL;
+
+	return (node);
+}
+
+/**
+ * hash_table_set - adds or updates an element in hash table
+ * @ht: pointer to hash table
+ * @key: key string
+ * @value: value associated with key
+ * Return: 1 on success, 0 on failure
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new;
-	hash_node_t *tmp;
+	hash_node_t *new, *tmp;
 	unsigned int index;
 
-	if (ht == NULL || strlen(key) == 0)
+	if (ht == NULL || key == NULL || *key == '\0')
 		return (0);
 
-	index = key_index((const unsigned char *) key, ht->size);
+	index = key_index((const unsigned char *)key, ht->size);
 	tmp = ht->array[index];
-
-	if (ht->array[index] == NULL)
-	{
-		new = malloc(sizeof(hash_node_t *));
-		if (new == NULL)
-			return (0);
-		new->key = strdup(key);
-		new->value = strdup(value);
-		new->next = NULL;
-		ht->array[index] = new;
-		return (1);
-	}
 
 	while (tmp)
 	{
@@ -41,12 +50,12 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		tmp = tmp->next;
 	}
 
-	new = malloc(sizeof(hash_node_t *));
+	new = create_node(key, value);
 	if (new == NULL)
 		return (0);
-	new->key = strdup(key);
-	new->value = strdup(value);
+
 	new->next = ht->array[index];
 	ht->array[index] = new;
+
 	return (1);
 }
